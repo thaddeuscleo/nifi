@@ -152,11 +152,11 @@ class WriteHelloWorld(FlowFileTransform):
     class ProcessorDetails:
         version = '0.0.1-SNAPSHOT'
 
-    def __init__(self, **kwargs):
+    def __init__(self, jvm, **kwargs):
         super().__init__(**kwargs)
 
     def transform(self, context, flowfile):
-        return FlowFileTransformResult(relationship = "success", contents = "Hello World", attributes = {"greeting", "hello"})
+        return FlowFileTransformResult(relationship = "success", contents = "Hello World", attributes = {"greeting": "hello"})
 ----
 
 The `transform` method is expected to take two arguments: the context (of type `nifiapi.properties.ProcessContext`) and
@@ -309,7 +309,7 @@ from nifiapi.properties import PropertyDescriptor, StandardValidators
 
 class PrettyPrintJson(FlowFileTransform):
 ...
-    def __init__(self, **kwargs):
+    def __init__(self, jvm, **kwargs):
         super.__init(**kwargs)
 
         numspaces = PropertyDescriptor(name="Number of Spaces",
